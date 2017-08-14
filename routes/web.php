@@ -16,3 +16,5 @@ Route::get('/', function () {
 });
 
 Route::get('new/index', 'NewsController@index');
+
+Route::get('new/add', 'NewsController@add');
