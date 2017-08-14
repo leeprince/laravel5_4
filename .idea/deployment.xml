@@ -5,7 +5,7 @@
       <paths name="leeprince">
         <serverdata>
           <mappings>
-            <mapping local="$PROJECT_DIR$" web="laravel5_4" />
+            <mapping local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>
