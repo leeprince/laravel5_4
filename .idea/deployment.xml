@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="leeprince">
+    <serverData>
+      <paths name="leeprince">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="laravel5_4" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>
