@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
   <component name="PublishConfigData" autoUpload="Always" serverName="p_laravel5_4" filePermissions="511" folderPermissions="493">
+=======
+  <component name="PublishConfigData" serverName="leeprince">
+>>>>>>> 76d294beffd8e41b3df3ff584cb391d1f2121781
     <serverData>
       <paths name="leeprince">
         <serverdata>
@@ -9,6 +13,7 @@
           </mappings>
         </serverdata>
       </paths>
+<<<<<<< HEAD
       <paths name="leeprince (1)">
         <serverdata>
           <mappings>
@@ -25,5 +30,8 @@
       </paths>
     </serverData>
     <option name="myAutoUpload" value="ALWAYS" />
+=======
+    </serverData>
+>>>>>>> 76d294beffd8e41b3df3ff584cb391d1f2121781
   </component>
 </project>
