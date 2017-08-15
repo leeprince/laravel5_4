@@ -1,21 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="On explicit save action" filePermissions="511" folderPermissions="493">
+  <component name="PublishConfigData" autoUpload="Always" serverName="p_laravel5_4" filePermissions="511" folderPermissions="493">
     <serverData>
-      <paths name="leeprince">
-        <serverdata>
-          <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
-          </mappings>
-        </serverdata>
-      </paths>
-      <paths name="leeprince (1)">
-        <serverdata>
-          <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
-          </mappings>
-        </serverdata>
-      </paths>
       <paths name="p_laravel5_4">
         <serverdata>
           <mappings>
@@ -24,6 +10,6 @@
         </serverdata>
       </paths>
     </serverData>
-    <option name="myAutoUpload" value="ON_EXPLICIT_SAVE" />
+    <option name="myAutoUpload" value="ALWAYS" />
   </component>
 </project>
