@@ -103,8 +103,19 @@ Route::get('/', function () {
 
 Route::get('member/info', 'MemberController@info');
 
+// 原生 sql 
 Route::get('student/sourceQuery', 'StudentController@sourceQuery');
 
+// 查询构造器
 Route::get('student/constructQuery', 'StudentController@constructQuery');
+
+// Eloquent ORM
+Route::get('student/ormQuery', 'StudentController@ormQuery');
+
+// 模板引擎
+Route::get('student/bladeEngine', 'StudentController@bladeEngine');
+
+// 模板中URL
+Route::get('student/modelUrl', 'StudentController@modelUrl')->name('model_url');
 
 /**************** Demo-end _201708141640*/
