@@ -102,7 +102,6 @@ Route::get('/', function () {
 
 
 Route::get('member/info', 'MemberController@info');
-<<<<<<< HEAD
 
 // 原生 sql 
 Route::get('student/sourceQuery', 'StudentController@sourceQuery');
@@ -118,11 +117,5 @@ Route::get('student/bladeEngine', 'StudentController@bladeEngine');
 
 // 模板中URL
 Route::get('student/modelUrl', 'StudentController@modelUrl')->name('model_url');
-=======
-
-Route::get('student/info', 'StudentController@info');
-
-Route::get('student/constructQuery', 'StudentController@constructQuery');
->>>>>>> 24045ab93fbc8568feb16c6ee8bb1a8dbf358e1c
 
 /**************** Demo-end _201708141640*/

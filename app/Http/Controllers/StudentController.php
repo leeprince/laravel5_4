@@ -3,21 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-<<<<<<< HEAD
 use App\Models\Student;
-=======
->>>>>>> 24045ab93fbc8568feb16c6ee8bb1a8dbf358e1c
 use Illuminate\Support\Facades\DB;
 
 
 class StudentController extends Controller
 {
 	// 原生 SQL查询
-<<<<<<< HEAD
     public function sourceQuery()
-=======
-    public function info()
->>>>>>> 24045ab93fbc8568feb16c6ee8bb1a8dbf358e1c
     {
 		// return 'studentController@info';
 
@@ -29,11 +22,8 @@ class StudentController extends Controller
         dd($db);
 
     	// 原生 SQL查询-INSERT
-<<<<<<< HEAD
+
     	// - 占位符 ? 进行参数绑定;
-=======
-    	// 占位符 ? 进行参数绑定;
->>>>>>> 24045ab93fbc8568feb16c6ee8bb1a8dbf358e1c
   /*  	$bool = DB::insert('INSERT INTO student(name, age, sex, created_at, updated_at) VALUES (?, ?, ?, ?, ?)',[
 			'lpname',
 			18,
@@ -41,12 +31,8 @@ class StudentController extends Controller
 			'2017-08-14 17:33:57',
 			'2017-08-15 17:33:57',
     	]);*/
-<<<<<<< HEAD
 
     	// - 命名进行参数绑定
-=======
-    	// 命名进行参数绑定
->>>>>>> 24045ab93fbc8568feb16c6ee8bb1a8dbf358e1c
    /* 	$bool = DB::insert("INSERT INTO student(name, age, sex, created_at, updated_at) VALUES (:name, :age, :sex, :created_at, :updated_at)",[
 			':name'       => 'lpname1',
 			':age'        => 18,
@@ -105,10 +91,7 @@ class StudentController extends Controller
 			'updated_at' => '2017-08-16 00:33:57',
     	]);
     	var_dump($bool);*/
-<<<<<<< HEAD
 
-=======
->>>>>>> 24045ab93fbc8568feb16c6ee8bb1a8dbf358e1c
     	// 2. 插入-获得自增id
     	/*$id = DB::table('student')->insertGetId([
 			'name'       => 'leeprince_3-1',
@@ -118,10 +101,7 @@ class StudentController extends Controller
 			'updated_at' => '2017-08-16 00:33:57',
     	]);
     	var_dump($id);*/
-<<<<<<< HEAD
 
-=======
->>>>>>> 24045ab93fbc8568feb16c6ee8bb1a8dbf358e1c
     	// 3. 插入-批量
     	/*$id = DB::table('student')
     			->insert([
@@ -155,10 +135,7 @@ class StudentController extends Controller
 				]);
 
     	var_dump($num);*/
-<<<<<<< HEAD
 
-=======
->>>>>>> 24045ab93fbc8568feb16c6ee8bb1a8dbf358e1c
     	// 更新-多条数据
     	/*$num = DB::table('student')
 				->where('age', '>=', 30)
@@ -167,7 +144,7 @@ class StudentController extends Controller
 				]);
 
     	var_dump($num);*/
-<<<<<<< HEAD
+
 		// 更新-数组条件多条数据
     	/*$num = DB::table('student')
 				->where([
@@ -176,20 +153,10 @@ class StudentController extends Controller
 				])
 				->update([
 					'name' => 'leeprince_9',
-=======
-		// 更新-多条数据
-   /* 	$num = DB::table('student')
-				->where([
-					['age', '>=', 30],
-				])
-				->update([
-					'name' => 'lpname_1',
->>>>>>> 24045ab93fbc8568feb16c6ee8bb1a8dbf358e1c
 				]);
 
     	var_dump($num);*/
 
-<<<<<<< HEAD
     	// 自增/自减 
     	// - 自增
     	// $num = DB::table('student')->increment('age');
@@ -202,22 +169,11 @@ class StudentController extends Controller
     	var_dump($num);*/
 
     	// 删除 - 条件删除
-=======
-    	// 自增/自减-自增-自增指定值-自增指定值和额外列更新(慎用)-按条件自增指定值和额外列更新
-    	// $num = DB::table('student')->increment('age');
-    	// $num = DB::table('student')->increment('age', 2);
-    	// $num = DB::table('student')->decrement('age', 5, ['name' => 'leeprince']);
-    	/*$num = DB::table('student')->where(['name' => 'leeprince'])->decrement('age', 5, ['sex' => 1]);
-    	var_dump($num);*/
-
-    	// 删除-条件删除
->>>>>>> 24045ab93fbc8568feb16c6ee8bb1a8dbf358e1c
     	/*$num = DB::table('student')->where(['id' => 17])->delete();
     	var_dump($num);*/
     	// 删除-删除该表所有列的值,没有返回值(慎用)
     	/*DB::table('student')->truncate();*/
 
-<<<<<<< HEAD
     	// 查询
     	// get():返回结果集
     	/*$info = DB::table('student')->get();
@@ -518,7 +474,5 @@ class StudentController extends Controller
     {
     	
     	return 'modelUrl';
-=======
->>>>>>> 24045ab93fbc8568feb16c6ee8bb1a8dbf358e1c
     }
 }
