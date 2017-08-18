@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Student;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 
 class StudentController extends Controller
@@ -475,4 +477,184 @@ class StudentController extends Controller
     	
     	return 'modelUrl';
     }
+
+    // Controller - Request
+    public function ctlRequest(Request $request)
+    {
+    	// 请求参数
+    	/*$params = $request -> input('name');*/
+    	/*$params = $request -> input('name', 'leeprince');
+    	echo $params;*/
+
+    	/*if($request -> has('name')){
+    		echo $request -> input('name');
+    	}else{
+    		echo 'No params name';
+    	}*/
+
+    	/*$params = $request -> all();
+    	print_r($params);*/
+
+    	// 请求类型    	
+    	/*$method = $request -> method();*/
+    	/*$method = $request -> isMethod('GET');*/
+    	/*$method = $request -> isMethod('POST');*/
+    	/*$method = $request -> ajax();*/
+    	$method = $request -> is('student/*');
+    	var_dump($method);
+    	
+    }
+
+    // Controller - Session;
+    public function ctlSession1(Request $request){
+
+    	// HTTP request session()
+    	/*$request -> session() -> put('key1', 'value1');
+    	$request -> session() -> put('key2', 'value2');
+    	echo $sessionValue = $request -> session() -> get('key1');*/
+
+    	// session()
+    	/*session() -> put('key3', 'value3');
+    	echo $sessionValue = session() -> get('key3');*/
+
+    	// Session()
+    	/*// - 存储到session
+    	Session::put('key4', 'value4');
+    	// - 获取 session 值
+    	// echo Session::get('key4');
+    	// - 获取 session 值, 不存在则使用默认值
+    	echo Session::get('key5', 'default5');*/
+
+    	// 以数组的形式存储数据
+    	Session::put([
+    		'key_1' => 'value_1',
+    		'key_2' => 'value_2',
+    	]);
+    	echo Session::get('key_1');
+    	// echo Session::get('key_2');
+
+    	// 把数据放到 session 的数组中
+    	/*Session::push('p_key', 'p_value1');
+    	Session::push('p_key', 'p_value2');
+    	$res = Session::get('p_key');
+    	var_dump($res);*/
+
+    	// 取出数据并删除
+    	/*$res = Session::pull('p_key');
+    	var_dump($res);*/
+
+    	// 取出所有 session 中 key 的值
+    	/*$res = Session::all();
+    	var_dump($res);*/
+    	
+    	// 判断 session 中的某个 key 是否存在
+    	// if (Session::has('p_key')){
+    	// 	$res = Session::all();
+    	// 	// var_dump($res);
+    	// 	dd($res);
+    	// }else{
+    	// 	echo 'p_key no exist ';
+    	// }
+
+    	// 一次性 session 
+    	/*Session::flash('p_key_1', 'value_1');
+    	echo Session::get('p_key_1');*/
+
+
+    	/*$res = Session::all();
+    	print_r($res);
+    	echo '<br>key1 - ' . Session::get('key1'). "<br>";
+    	// 删除 session 中指定的 key 的值
+    	Session::forget('key1');
+    	echo "<br>key1 -" .Session::get('key1'). "<br>";
+
+    	$res = Session::all();
+    	print_r($res);*/
+
+    	// 清空所有 session 
+    	/*Session::flush();*/
+
+
+
+    }
+
+    public function ctlSession2(Request $request){
+
+    	
+    	
+    }
+
+    public function ctlResponse()
+    {
+    	// 响应 json 
+    	/*$data = [
+			'name'     => 'leprince',
+			'identify' => 'php',
+			'id'       => 12,
+    	];
+    	var_dump($data);
+    	return response() -> json($data);*/
+
+    	// 重定向 - redirect
+    	// return redirect('ctlRedirect');
+
+    	// - 重定向到一个新的 URL 并将数据存储到一次性 Session 中通常是同时完成的，为了方便，可以创建一个 RedirectResponse 实例然后在同一个方法链上将数据存储到 Session，这种方式在 action 之后存储状态信息时特别方便：
+    	// return redirect('ctlRedirect') -> with([
+    	// 	'errorCode' => 503,
+    	// 	'msg' => 'redirect page - 一次性 Session'
+    	// ]);
+
+    	// - action()
+    	/*return redirect()->action('StudentController@ctlResponseRedirect')
+    			 -> with([
+		    		'errorCode' => 503,
+		    		'msg' => 'redirect page - 一次性 Session'
+		    	]);*/
+
+    	// - route
+    	/*return redirect()->route('ctl_redirect')
+    			 -> with([
+		    		'errorCode' => 503,
+		    		'msg' => 'redirect page - 一次性 Session'
+		    	]);*/
+
+    	// - back()
+    	return redirect()->back();
+    }
+
+    public function ctlResponseRedirect()
+    {
+    	return 'ctlResponseRedirect - '. Session::get('msg', '暂无信息');
+    	
+    }
+
+    public function mdwActivity0()
+    {
+    	return '活动即将开启, 敬请期待';
+    }
+    public function mdwActivity1()
+    {
+    	
+    	return '活动正在进行中, 感谢您的参与';
+    }
+    public function mdwActivity2()
+    {
+
+    	return '活动已结束, 请继续关注我们';
+    }
+
+    public function index()
+    {
+        $students = Student::orderBy('id','ASC')->paginate(2);
+
+        foreach( $students as &$student){
+            $student->sex = ($student['sex']) ? '男' : '女';
+        }
+        // var_dump($students);
+
+        return view('student/index',[
+            'students' => $students,
+        ]);
+    }
+
 }

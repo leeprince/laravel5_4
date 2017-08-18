@@ -80,7 +80,6 @@
 	@endforelse
 	--}}
 	
-	<!-- url('/student/modelUrl') 首字母不大写, 后面保持一致 -->
 	<a href="{{ url('/student/modelUrl') }}">url()</a><br>
 	<a href="{{ action('StudentController@modelUrl')}}">action()</a><br>
 	<a href="{{ route('model_url') }}">route()</a><br>

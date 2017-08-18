@@ -118,4 +118,29 @@ Route::get('student/bladeEngine', 'StudentController@bladeEngine');
 // 模板中URL
 Route::get('student/modelUrl', 'StudentController@modelUrl')->name('model_url');
 
+// controller - request
+Route::get('student/ctlRequest', 'StudentController@ctlRequest');
+
+// controller - session; 'web':D:\xampp\htdocs\laravel5_4\app\Http\Kernel.php-29;
+Route::group(['middleware' => ['web']], function(){
+    Route::any('student/ctlSession1', 'StudentController@ctlSession1');
+    Route::any('student/ctlSession2', 'StudentController@ctlSession2');
+
+    // controller - response
+    Route::any('ctlResponse', 'StudentController@ctlResponse');
+    Route::any('ctlRedirect', 'StudentController@ctlResponseRedirect')->name('ctl_redirect');
+});
+
+
+// controller - Middleware ;定义中间件 -> 注册中间件; 活动宣传 -> 活动进行中 -> 活动已结束 
+Route::any('mdwActivity0', 'StudentController@mdwActivity0');
+
+Route::group(['middleware' => ['activity']], function(){
+
+    Route::any('mdwActivity1', 'StudentController@mdwActivity1');
+    Route::any('mdwActivity2', 'StudentController@mdwActivity2');
+});
+
+Route::any('student_index', 'StudentController@index');
+
 /**************** Demo-end _201708141640*/
