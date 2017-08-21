@@ -12,7 +12,7 @@ class RouteController extends BaseController
     public function route_name()
     {
 
-        return 'laravel RouteController.php@route_name-route_name:'.route('route_name_url');
+        return 'laravel RouteController.php@route_name-route_name: '.route('route_name_url');
 
     }
 

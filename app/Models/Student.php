@@ -19,6 +19,10 @@ class Student extends  Model
     const CREATED_AT = 'created_at';
 	const UPDATED_AT = 'updated_at';
 
+    // 性别
+    const SEX_BOY  = '男'; //男
+    const SEX_GIRL = '女'; //女
+
     // 批量赋值白名单
     protected $fillable = ['name', 'age', 'sex'];
 
@@ -39,6 +43,21 @@ class Student extends  Model
     protected function asDateTime($val)
     {
     	return $val;
+    }
+
+    // 性别
+    public function getSex($bool = null)
+    {
+        $sexArray = [
+            0 => self::SEX_BOY,
+            1 => self::SEX_GIRL,
+        ];
+
+        if($bool !== null){
+            return ($bool)? self::SEX_BOY : self::SEX_GIRL;
+        }
+
+        return $sexArray;
     }
 
 }

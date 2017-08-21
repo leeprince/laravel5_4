@@ -18,7 +18,7 @@
         <div class="container">
             <h2>轻松学会Laravel</h2>
 
-            <p> - 玩转Laravel表单</p>
+            <p> - 玩转Laravel表单 - {{ Request::getPathInfo() }}</p>
         </div>
     </div>
 @show
@@ -31,8 +31,8 @@
             <!-- 左侧菜单区域   -->
             <div class="col-md-3">
                 <div class="list-group">
-                    <a href="#" class="list-group-item active">学生列表</a>
-                    <a href="#" class="list-group-item">新增学生</a>
+                    <a href="{{ url('student_index') }}" class="list-group-item {{ (Request::getPathInfo() == '/student_index')? 'active' : ''}}">学生列表</a>
+                    <a href="{{ url('student_create') }}" class="list-group-item {{ (Request::getPathInfo() == '/student_create')? 'active' : ''}}">新增学生</a>
                 </div>
             </div>
         @show

@@ -132,7 +132,7 @@ Route::group(['middleware' => ['web']], function(){
 });
 
 
-// controller - Middleware ;定义中间件 -> 注册中间件; 活动宣传 -> 活动进行中 -> 活动已结束 
+// controller - 请求, 响应, session,  Middleware ;定义中间件 -> 注册中间件; 活动宣传 -> 活动进行中 -> 活动已结束 
 Route::any('mdwActivity0', 'StudentController@mdwActivity0');
 
 Route::group(['middleware' => ['activity']], function(){
@@ -141,6 +141,27 @@ Route::group(['middleware' => ['activity']], function(){
     Route::any('mdwActivity2', 'StudentController@mdwActivity2');
 });
 
-Route::any('student_index', 'StudentController@index');
+// 表单 - 静态资源管理, 模板布局, 分页
+Route::get('student_index', 'StudentController@index');
+Route::group(['middleware' => ['web']], function(){
+    
+    Route::any('student_create', 'StudentController@formCreate');// 有表单提交, 需要中间件防 CSRF 攻击
+    Route::any('student_update/{id?}', 'StudentController@formUpdate', function ($id = 1){
+        return '修改学生信息';
+    });// 有表单提交, 需要中间件防 CSRF 攻击
+});
+Route::any('student_update/{id?}', 'StudentController@formUpdate', function ($id = 1){
+    return '修改学生信息';
+});// 有表单提交, 需要中间件防 CSRF 攻击
 
+/*
+|--------------------------------------------------------------------------
+| Application Routes
+|--------------------------------------------------------------------------
+|
+| This route group applies the "web" middleware group to every route
+| it contains. The "web" middleware group is defined in your HTTP
+| kernel and includes session state, CSRF protection, and more.
+|
+*/
 /**************** Demo-end _201708141640*/

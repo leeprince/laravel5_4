@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use App\Http\Controllers\Controller;
 use App\Models\Student;
 use Illuminate\Support\Facades\DB;
@@ -99,27 +100,44 @@ class StudentController extends Controller
 			'name'       => 'leeprince_3-1',
 			'age'        => 23,
 			'sex'        => 0,
-			'created_at' => '2017-08-14 17:33:57',
-			'updated_at' => '2017-08-16 00:33:57',
+			'created_at' => '1503297244',
+			'updated_at' => '1503297244',
     	]);
     	var_dump($id);*/
 
-    	// 3. 插入-批量
+        // 3. 插入 - 批量
+        /*$id = DB::table('student')
+                ->insert([
+                    [
+                        'name'       => 'leeprince_3-2',
+                        'age'        => 23,
+                        'sex'        => 0,
+                        'created_at' => '2017-08-14 17:33:57',
+                        'updated_at' => '2017-08-16 00:33:57',
+                    ],
+                    [
+                        'name'       => 'leeprince_3-3',
+                        'age'        => 23,
+                        'sex'        => 0,
+                        'created_at' => '2017-08-14 17:33:57',
+                        'updated_at' => '2017-08-16 00:33:57',
+                    ],
+                    
+                ]);
+        var_dump($id);*/
+
+    	// 3. 插入 - 批量 - 自动维护created_at, updated_at 
     	/*$id = DB::table('student')
     			->insert([
 		    		[
-						'name'       => 'leeprince_3-2',
+						'name'       => 'leeprince_3',
 						'age'        => 23,
 						'sex'        => 0,
-						'created_at' => '2017-08-14 17:33:57',
-						'updated_at' => '2017-08-16 00:33:57',
 		    		],
 		    		[
-						'name'       => 'leeprince_3-3',
+						'name'       => 'leeprince_4',
 						'age'        => 23,
 						'sex'        => 0,
-						'created_at' => '2017-08-14 17:33:57',
-						'updated_at' => '2017-08-16 00:33:57',
 		    		],
 		    		
 		    	]);
@@ -385,7 +403,7 @@ class StudentController extends Controller
     	$bool = $student -> save();
     	dd($bool);*/
 
-    	// 新增 - 使用模型 create 方法保存一个新的模型。该方法返回被插入的模型实例, 你需要指定模型的 fillable 或 guarded 属性，因为所有 Eloquent 模型都通过批量赋值（Mass Assignment）进行保护。
+    	// 新增 - 使用模型 create() 批量新增方法保存一个新的模型。该方法返回被插入的模型实例, 你需要指定模型的 fillable 或 guarded 属性，因为所有 Eloquent 模型都通过批量赋值（Mass Assignment）进行保护。
     	/*$create  = Student::create([
     		'name' => 'leeprince_9-5',
     		'age' => '24',
@@ -411,13 +429,13 @@ class StudentController extends Controller
     	$firstOrNew -> save();
     	dd($firstOrNew);*/
 
-    	// 更新 -save();
+    	// 更新 - save();
     	/*$students = Student::find(31);
     	$students ->sex = true;
     	$students -> save();
     	echo $students;*/
 
-    	// 更新 -update();
+    	// 更新 - update();
     	/*$update = Student::where([
     			['id', '>=', 40],
     			['sex', true]
@@ -645,15 +663,128 @@ class StudentController extends Controller
 
     public function index()
     {
-        $students = Student::orderBy('id','ASC')->paginate(2);
+        $students = Student::orderBy('id','ASC')->paginate(10);
 
         foreach( $students as &$student){
-            $student->sex = ($student['sex']) ? '男' : '女';
+            $student->sex = $student->getSex($student['sex']);
         }
         // var_dump($students);
+        // var_dump($sex);
 
         return view('student/index',[
             'students' => $students,
+        ]);
+    }
+
+    public function formCreate(Request $request)
+    {
+        $student = new Student();
+        $sex     = $student -> getSex();
+        if ($request->isMethod('POST')){
+
+            // 验证
+            // 验证 - 通过控制器验证器验证
+            /*$validate = $this -> validate($request, [
+                'name' => 'required|min:2|max:20',
+                'age'  => 'required|min:0|max:200|Integer',
+                'sex'  => 'required|Integer',
+            ],[
+                'required' => ':attribute - 为必填项 !',
+                'min'      => ':attribute - 长度不在范围内 !',
+                'max'      => ':attribute - 长度不在范围内 !',
+                'Integer'  => ':attribute - 必须为整数 !',
+            ],[
+                'name' => '姓名',
+                'age'  => '年龄',
+                'sex'  => '性别',
+            ]);*/
+
+            // 验证 - 通过手动创建验证器验证: 使用 Validator 类 \Validator::make()或者在头部: use Validator;
+            $validator = Validator::make($request -> all(), [
+                'name' => 'required|min:2|max:20',
+                'age'  => 'required|min:0|max:200|integer',
+                'sex'  => 'required|Integer',
+            ],[
+                'required' => ':attribute - 为必填项 !',
+                'min'      => ':attribute - 长度不在范围内 !',
+                'max'      => ':attribute - 长度不在范围内 !',
+                'integer'  => ':attribute - 必须为整数 !',
+            ],[
+                'name' => '姓名',
+                'age'  => '年龄',
+                'sex'  => '性别',
+            ]);
+
+            if($validator -> fails()){
+                
+                return redirect()->back()->withErrors($validator)->withInput();
+
+            }
+
+
+            $data = $request -> all();
+            // var_dump($data);
+            // dd($data);
+
+            // 新增
+            // 新增 - save() - 新增数据(推荐)
+           /* $student = new Student;
+            // - 对象形式赋值
+            $student -> name = $data['name'];
+            $student -> age = $data['age'];
+            $student -> sex = $data['sex'];
+
+            // - 数组形式赋值
+            // $student['name'] = $data['name'];
+            // $student['age']  = $data['age'];
+            // $student['sex']  = $data['sex'];
+            $bool = $student -> save();*/
+
+            // 新增 - create():$fillable , guarded - 新增数据
+            // $bool = Student::create($data);
+
+
+
+            // 新增 - 查询构造器 获得自增 id
+            $addData['name'] = $data['name'];
+            $addData['age']  = $data['age'];
+            $addData['sex'] = $data['sex'];
+            $bool   = DB::table('student') -> insertGetId($addData);
+
+            if ($bool){
+                return redirect('student_index')->with('success', "添加成功! - $bool ");
+            }else{
+                return redirect('student_index')->with('fail', '添加失败 !');
+            }
+
+
+        }
+
+        return view('student/create', [
+            'sex' => $sex
+        ]);
+    }
+
+    public function formUpdate($id = 0)
+    {
+        $infos = Student::find($id);
+        // dd($infos);
+        
+        $sex     = $infos -> getSex();
+
+        if(!$infos){
+            return redirect('student_index');
+        }
+
+        // foreach($infos as &$info)
+        // {
+        //     $info->sex = $info->getSex($info['sex']);
+        // }
+       
+        return view('student/update', [
+            'id'    => $id,
+            'sex'   => $sex,
+            'infos' => $infos,
         ]);
     }
 
