@@ -56,5 +56,8 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+
+        // 自定义_leeprince: controller - Middleware ;活动宣传 -> 活动进行中 -> 活动已结束 
+        'activity' => \App\Http\Middleware\Activity::class,
     ];
 }
