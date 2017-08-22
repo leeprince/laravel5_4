@@ -331,9 +331,9 @@ class StudentController extends Controller
     	dd($all);*/
 
     	// 查找 - 使用模型的find():条件查询一条记录
-    	$find = Student::find(1);
+    	/*$find = Student::find(1);
     	// dd($find);
-    	var_dump($find);
+    	var_dump($find);*/
 
     	// 查找 - 使用模型的findOrFail():条件查找数据,没有即抛出异常
     	/*$findOrFail = Student::findOrFail(1);
@@ -451,10 +451,11 @@ class StudentController extends Controller
     	echo $bool;*/
 
     	// 删除 - 通过主键删除
-    	/*// $id = Student::destroy(39);
-    	$id = Student::destroy(32, 33, 34]);
-    	$id = Student::destroy([36, 37, 38]);
-    	echo $id;*/
+    	$bool = Student::destroy(18);
+        echo $bool;
+    	/*$bool = Student::destroy(32, 33, 34);
+    	$bool = Student::destroy([36, 37, 38]);
+    	echo $bool;*/
 
     	// 删除 - 通过查询删除
     	// $bool = Student::where([
@@ -716,7 +717,8 @@ class StudentController extends Controller
             ]);
 
             if($validator -> fails()){
-                
+                // withInput :保留验证出现错误后输入框中的内容
+                // withErrors :一次性 session 报错信息
                 return redirect()->back()->withErrors($validator)->withInput();
 
             }
@@ -765,26 +767,121 @@ class StudentController extends Controller
         ]);
     }
 
-    public function formUpdate($id = 0)
+    public function formUpdate(Request $request, $id = 0)
     {
         $infos = Student::find($id);
+        $sex   = $infos -> getSex();
         // dd($infos);
         
-        $sex     = $infos -> getSex();
-
         if(!$infos){
             return redirect('student_index');
         }
 
-        // foreach($infos as &$info)
-        // {
-        //     $info->sex = $info->getSex($info['sex']);
-        // }
+        $infos->sex = $infos->getSex($infos['sex']);
+
+        if($request -> isMethod('POST')){
+
+            // 验证
+            // 验证 - 通过控制器验证器验证
+            $validate = $this -> validate($request, [
+                'name' => 'required|min:2|max:20',
+                'age'  => 'required|min:0|max:200|integer',
+                'sex'  => 'required|integer',
+            ],[
+                'required' => ':attribute - 为必填项 !',
+                'min'      => ':attribute - 长度不在范围内 !',
+                'max'      => ':attribute - 长度不在范围内 !',
+                'integer'  => ':attribute - 必须为整数 !',
+            ],[
+                'name' => '姓名',
+                'age'  => '年龄',
+                'sex'  => '性别',
+            ]);
+
+            // 验证 - 通过手动创建验证器验证: 使用 Validator 类 \Validator::make()或者在头部: use Validator;
+            /*$validator = Validator::make($request -> all(), [
+                'name' => 'required|min:2|max:20',
+                'age'  => 'required|min:0|max:200|integer',
+                'sex'  => 'required|Integer',
+            ],[
+                'required' => ':attribute - 为必填项 !',
+                'min'      => ':attribute - 长度不在范围内 !',
+                'max'      => ':attribute - 长度不在范围内 !',
+                'integer'  => ':attribute - 必须为整数 !',
+            ],[
+                'name' => '姓名',
+                'age'  => '年龄',
+                'sex'  => '性别',
+            ]);
+
+            if($validator -> fails()){
+                // withInput :保留验证出现错误后输入框中的内容
+                // withErrors :一次性 session 报错信息
+                return redirect()->back()->withErrors($validator)->withInput();
+
+            }*/
+
+            $data = $request -> all();
+
+            // 新增 - 使用模型 save() 新增数据
+            $student = Student::find($id);
+            // -- 对象方式的 save()
+            // $student -> name = "leprince_9-8";
+            // $student -> age = "21";
+            // $student -> sex = true;
+            // -- 数组方式的 save()
+            $student['name'] = $data['name'];
+            $student['age']  = $data['age'];
+            $student['sex']  = $data['sex'];
+            // dd($student);
+            $bool = $student -> save();
+            // dd($bool);//dd() 不同于 print_r(), var_dump() ;dd() 会终止程序输出
+
+            if($bool){
+                return redirect('student_index')->with('success', '更新成功! - '.$id);
+            }else{
+                return redirect()->back()->with('fail', "更新失败! - ".$id);
+            }
+        }
        
         return view('student/update', [
             'id'    => $id,
             'sex'   => $sex,
             'infos' => $infos,
+        ]);
+    }
+
+    public function formDelete(Request $request, $id = 0)
+    {
+        if($request -> ajax())
+        {
+            $id = $request -> input('id');
+
+            $bool = Student::destroy($id);
+
+            if($bool){
+                return response()->json([
+                    'msg' => '用户: '.$id.' 删除成功! ',
+                    'code'=> 200
+                ]);
+            }else{
+                return response()->json([
+                    'msg' => '[注意] 用户: '.$id.' 删除失败! ',
+                    'code'=> 201
+                ]);
+            }
+        }
+    }
+
+    public function formView(Request $request, $id = 0)
+    {
+        $students = Student::find($id);
+
+        // $students['sex'] = $students->getSex($students['sex']);
+        $students->sex = $students->getSex($students['sex']);
+
+        return view('student/detail', [
+            'students' => $students,
         ]);
     }
 

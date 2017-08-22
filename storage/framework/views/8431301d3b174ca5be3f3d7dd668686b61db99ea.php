@@ -24,9 +24,9 @@
 		            <td><?php echo e($student['sex']); ?></td>
 		            <td><?php echo e(date('Y-m-d H:i:s', $student['created_at'])); ?></td>
 		            <td>
-		                <a href="">详情</a>
-		                <a href="<?php echo e(url('student_update').'/'.$student['id']); ?>">修改</a>
-		                <a href="">删除</a>
+		                <a href="<?php echo e(url('student_view', ['id'=>$student['id']])); ?>">详情</a>
+		                <a href="<?php echo e(url('student_update', ['id'=>$student['id']])); ?>">修改</a>
+		                <a class="del" data-id="<?php echo e($student['id']); ?>">删除</a>
 		            </td>
 		        </tr>
 		    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -41,6 +41,13 @@
 
 		</div>
 	</div>
+<?php $__env->stopSection(); ?>
+
+
+<?php $__env->startSection('js'); ?>
+	<script src="<?php echo e(asset('./static/student/del.js')); ?>"></script>
+
+
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('common/layouts', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

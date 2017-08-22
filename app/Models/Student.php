@@ -30,7 +30,6 @@ class Student extends  Model
     // protected $guarded = ['guarded_field'];
 
     // 不使用 laravel 自动管理的数据列的时间格式设置, 自定义存储数据库的时间格式
-
     protected function getDateFormat()
     {
     	// 注意数据库中的数据类型;
@@ -54,7 +53,7 @@ class Student extends  Model
         ];
 
         if($bool !== null){
-            return ($bool)? self::SEX_BOY : self::SEX_GIRL;
+            return ($bool)? self::SEX_GIRL : self::SEX_BOY;
         }
 
         return $sexArray;

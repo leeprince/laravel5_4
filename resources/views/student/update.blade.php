@@ -12,8 +12,8 @@
 		
 	    <!-- 自定义内容区域 -->
 	    <div class="panel panel-default">
-	        <div class="panel-heading">修改学生 - {{ $id }}</div>
-	        	@include('student/_update_form')
+	        <div class="panel-heading"><a href="{{ url('student_index') }}">学生列表</a> >> 修改学生 - {{ $id }}</div>
+	        	@include('student/_form')
 	    </div>
 
 	</div>

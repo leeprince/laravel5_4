@@ -26,9 +26,9 @@
 		            <td>{{ $student['sex'] }}</td>
 		            <td>{{ date('Y-m-d H:i:s', $student['created_at']) }}</td>
 		            <td>
-		                <a href="">详情</a>
-		                <a href="{{ url('student_update').'/'.$student['id'] }}">修改</a>
-		                <a href="">删除</a>
+		                <a href="{{ url('student_view', ['id'=>$student['id']]) }}">详情</a>
+		                <a href="{{ url('student_update', ['id'=>$student['id']]) }}">修改</a>
+		                <a class="del" data-id="{{ $student['id'] }}">删除</a>
 		            </td>
 		        </tr>
 		    @endforeach
@@ -42,4 +42,11 @@
 			{{ $students->render() }}
 		</div>
 	</div>
+@endsection
+
+
+@section('js')
+	<script src="{{ asset('./static/student/del.js') }}"></script>
+
+
 @endsection

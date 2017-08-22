@@ -1,3 +1,4 @@
+{{-- {{ print_r($infos).' <br><br>sex= '.print_r($sex).' <br><br>infos_sex- '.$infos['sex'] }} --}}
 <div class="panel-body">
     <form class="form-horizontal" method='POST' action="">
 		
@@ -8,7 +9,7 @@
             <label for="name" class="col-sm-2 control-label">姓名</label>
 
             <div class="col-sm-5">
-                <input type="text" name='name'  class="form-control" id="name" value="{{ old('name') }}"" placeholder="请输入学生姓名">
+                <input type="text" name='name'  class="form-control" id="name" value="{{ isset($infos['name'])? $infos['name'] : old('name') }}" placeholder="请输入学生姓名">
             </div>
             <div class="col-sm-5">
                 <p class="form-control-static text-danger">{{ $errors->first('name') }}</p>
@@ -18,7 +19,7 @@
             <label for="age" class="col-sm-2 control-label">年龄</label>
 
             <div class="col-sm-5">
-                <input type="text" name='age' class="form-control" id="age" value="{{ old('age') }}" placeholder="请输入学生年龄">
+                <input type="text" name='age' class="form-control" id="age" value="{{ isset($infos['age'])? $infos['age'] : old('age') }}" placeholder="请输入学生年龄">
             </div>
             <div class="col-sm-5">
                 <p class="form-control-static text-danger">{{ $errors->first('age') }}</p>
@@ -28,11 +29,11 @@
             <label class="col-sm-2 control-label">性别</label>
 
             <div class="col-sm-5">
-            	@foreach($sex as $k => $v)
-                    <label class="radio-inline">
-                        <input type="radio" name="sex" value="{{ $k }}" {{ (old('sex') == $k)? 'checked' : '' }} > {{ $v }}
-                    </label>
-                @endforeach
+        		@foreach($sex as $k => $v)
+        	        <label class="radio-inline">
+        	            <input type="radio" name="sex" value="{{ $k }}" {{ ( isset($infos) && (old('sex') == $infos['sex'] || ($infos['sex'] == $v)) )? 'checked' : '' }} > {{ $v }}
+        	        </label>
+        	    @endforeach
             </div>
             <div class="col-sm-5">
                 <p class="form-control-static text-danger">{{ $errors->first('sex') }}</p>

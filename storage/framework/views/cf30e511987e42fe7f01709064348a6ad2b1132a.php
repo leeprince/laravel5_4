@@ -8,8 +8,8 @@
 		
 	    <!-- 自定义内容区域 -->
 	    <div class="panel panel-default">
-	        <div class="panel-heading">修改学生 - <?php echo e($id); ?></div>
-	        	<?php echo $__env->make('student/_update_form', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	        <div class="panel-heading"><a href="<?php echo e(url('student_index')); ?>">学生列表</a> >> 修改学生 - <?php echo e($id); ?></div>
+	        	<?php echo $__env->make('student/_form', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 	    </div>
 
 	</div>

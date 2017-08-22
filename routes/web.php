@@ -146,13 +146,11 @@ Route::get('student_index', 'StudentController@index');
 Route::group(['middleware' => ['web']], function(){
     
     Route::any('student_create', 'StudentController@formCreate');// 有表单提交, 需要中间件防 CSRF 攻击
-    Route::any('student_update/{id?}', 'StudentController@formUpdate', function ($id = 1){
-        return '修改学生信息';
-    });// 有表单提交, 需要中间件防 CSRF 攻击
+    Route::any('student_update/{id?}', 'StudentController@formUpdate');// 有表单提交, 需要中间件防 CSRF 攻击
 });
-Route::any('student_update/{id?}', 'StudentController@formUpdate', function ($id = 1){
-    return '修改学生信息';
-});// 有表单提交, 需要中间件防 CSRF 攻击
+Route::any('student_delete', 'StudentController@formDelete');
+Route::any('student_view/{id?}', 'StudentController@formView');
+
 
 /*
 |--------------------------------------------------------------------------

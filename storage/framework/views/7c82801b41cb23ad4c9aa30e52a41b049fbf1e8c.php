@@ -1,3 +1,5 @@
+<?php echo e(print_r($infos).' <br><br>sex= '.print_r($sex).' <br><br>infos_sex- '.$infos['sex']); ?>
+
 <div class="panel-body">
     <form class="form-horizontal" method='POST' action="">
 		
@@ -9,7 +11,7 @@
             <label for="name" class="col-sm-2 control-label">姓名</label>
 
             <div class="col-sm-5">
-                <input type="text" name='name'  class="form-control" id="name" value="<?php echo e($infos['name']); ?>" placeholder="请输入学生姓名">
+                <input type="text" name='name'  class="form-control" id="name" value="<?php echo e((old('sex'))? old('sex') : $infos['name']); ?>" placeholder="请输入学生姓名">
             </div>
             <div class="col-sm-5">
                 <p class="form-control-static text-danger"><?php echo e($errors->first('name')); ?></p>
@@ -19,7 +21,7 @@
             <label for="age" class="col-sm-2 control-label">年龄</label>
 
             <div class="col-sm-5">
-                <input type="text" name='age' class="form-control" id="age" value="<?php echo e($infos['age']); ?>" placeholder="请输入学生年龄">
+                <input type="text" name='age' class="form-control" id="age" value="<?php echo e((old('age'))? old('age') : $infos['age']); ?>" placeholder="请输入学生年龄">
             </div>
             <div class="col-sm-5">
                 <p class="form-control-static text-danger"><?php echo e($errors->first('age')); ?></p>
@@ -31,7 +33,7 @@
             <div class="col-sm-5">
         		<?php $__currentLoopData = $sex; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $k => $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         	        <label class="radio-inline">
-        	            <input type="radio" name="sex" value="<?php echo e($k); ?>" <?php echo e((old('sex') == $k)? 'checked' : ''); ?> > <?php echo e($v); ?>
+        	            <input type="radio" name="sex" value="<?php echo e($k); ?>" <?php echo e(((old('sex') == $infos['sex']) || ($infos['sex'] == $v) )? 'checked' : ''); ?> > <?php echo e($v); ?>
 
         	        </label>
         	    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
