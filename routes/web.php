@@ -11,6 +11,17 @@
 |
 */
 
+/*
+|--------------------------------------------------------------------------
+| Application Routes
+|--------------------------------------------------------------------------
+|
+| This route group applies the "web" middleware group to every route
+| it contains. The "web" middleware group is defined in your HTTP
+| kernel and includes session state, CSRF protection, and more.
+|
+*/
+
 /*************** Demo-start _leeprince-201708141640*/
 // 基本路由
 /*Route::get('route_basic_get', function(){
@@ -151,15 +162,7 @@ Route::group(['middleware' => ['web']], function(){
 Route::any('student_delete', 'StudentController@formDelete');
 Route::any('student_view/{id?}', 'StudentController@formView');
 
+// Laravel 中生成 Auth 所需文件
+Auth::routes();
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| This route group applies the "web" middleware group to every route
-| it contains. The "web" middleware group is defined in your HTTP
-| kernel and includes session state, CSRF protection, and more.
-|
-*/
-/**************** Demo-end _201708141640*/
+Route::get('/home', 'HomeController@index');

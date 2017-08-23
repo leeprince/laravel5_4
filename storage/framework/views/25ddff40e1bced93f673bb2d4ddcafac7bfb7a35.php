@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="_token" content="<?php echo e(csrf_token()); ?>"/>
-    <title>Learn Laravel - <?php echo $__env->yieldContent('title'); ?></title>
+    <title>Learn Laravel_leeprince - <?php echo $__env->yieldContent('title'); ?></title>
     <!-- Bootstrap CSS 文件 -->
     <link rel="stylesheet" href="<?php echo e(asset('./static/bootstrap/css/bootstrap.min.css')); ?>">
 
