@@ -10,8 +10,8 @@ class MailController extends Controller
 	public function send()
 	{
 		Mail::raw('邮件内容写在这里', function($message){
-			$message->from('leprincehz@163.com', 'leeprince163');
-			$message->subject('邮件主题写在这里');
+			$message->from('leeprincehz@163.com', 'leeprince163');
+			$message->subject('这是邮件主题');
 			$message->to('leeprince@foxmail.com');
 		});
 	}
