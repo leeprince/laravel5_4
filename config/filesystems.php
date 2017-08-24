@@ -55,6 +55,12 @@ return [
             'visibility' => 'public',
         ],
 
+        // 自定义上传
+        'uploads' => [
+            'driver' => 'local',
+            'root' => storage_path('app/uploads'),
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_KEY'),

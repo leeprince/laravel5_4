@@ -166,3 +166,5 @@ Route::any('student_view/{id?}', 'StudentController@formView');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+Route::any('file_upload', 'FileUploadController@upload');
