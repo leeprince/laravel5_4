@@ -324,6 +324,7 @@ class StudentController extends Controller
     	var_dump($num);
     }
 
+    // Eloquent ORM
     public function ormQuery()
     {
     	// 查找 - 使用模型的all():查询表的所有记录
@@ -345,14 +346,17 @@ class StudentController extends Controller
     	/*$get = Student::get();
     	dd($get);*/
 
-    	// 查找 - 条件查询记录
+    	// 查找 - 条件查询记录 get()
     	/*$get = Student::where([
-    			['id', '>=', 2],
-    			['sex', true]
-    		])
-    		->orderBy('id','ASC')
-    		->get();
-    	dd($first);*/
+				['id', '>=', 100],
+				['sex', true]
+			])
+			->orderBy('id','ASC')->get();
+        if (count($get)) {
+            dd($get);
+        } else {
+            echo '查询为空';
+        }*/
 
     	// 查找 - 使用模型的first():条件查询记录
     	/*$first = Student::where([
@@ -451,8 +455,8 @@ class StudentController extends Controller
     	echo $bool;*/
 
     	// 删除 - 通过主键删除
-    	$bool = Student::destroy(18);
-        echo $bool;
+    	/*$bool = Student::destroy(18);
+        echo $bool;*/
     	/*$bool = Student::destroy(32, 33, 34);
     	$bool = Student::destroy([36, 37, 38]);
     	echo $bool;*/

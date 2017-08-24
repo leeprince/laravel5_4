@@ -164,7 +164,19 @@ Route::any('student_view/{id?}', 'StudentController@formView');
 
 // Laravel 中生成 Auth 所需文件
 Auth::routes();
-
 Route::get('/home', 'HomeController@index');
 
+// 文件上传
 Route::any('file_upload', 'FileUploadController@upload');
+
+// 缓存
+Route::get('cache_setcache', 'CacheController@setCache');
+Route::get('cache_getcache', 'CacheController@getCache');
+
+// 调试及错误日志
+Route::get('error_debug', 'ErrorController@debug');
+Route::get('error_http', 'ErrorController@http');
+Route::get('error_log', 'ErrorController@log');
+
+// 邮件
+Route::get('mail_send', 'MailController@send');

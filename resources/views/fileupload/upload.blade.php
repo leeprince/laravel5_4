@@ -5,7 +5,15 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">UPLOAD</div>
+                <div class="panel-heading">文件上传
+                    <span style='color:red'>
+                        <b>
+                            {{-- 重定向 - with()传值 --}}
+                            {{ Session::has('msg')? ' - '.Session::get('msg') : '' }}
+                            {{ isset($msg)? ' - '.$msg : '' }}
+                        </b> 
+                    </span>
+                </div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="" enctype="multipart/form-data">
                         {{ csrf_field() }}

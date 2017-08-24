@@ -3,7 +3,15 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">UPLOAD</div>
+                <div class="panel-heading">文件上传
+                    <span style='color:red'>
+                        <b>
+                         
+                         <?php echo e(isset($msg)? $msg : ''); ?>
+
+                        </b> 
+                    </span>
+                </div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="" enctype="multipart/form-data">
                         <?php echo e(csrf_field()); ?>
