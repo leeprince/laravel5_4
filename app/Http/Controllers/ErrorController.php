@@ -47,7 +47,7 @@ class ErrorController extends Controller
 
 		// Log::debug('这是 debug 调试 !');
 
-		// Log::error('这是 error 错误信息 !');
+		// Log::error('这是 error 错误信息 !'); 可以传入数组,保存到日志中会自动转化为 json 格式
 		Log::error('这是 error 错误信息 !', ['id'=>400, 'msg'=>'leepirnce_error_test']);
 	}
 }

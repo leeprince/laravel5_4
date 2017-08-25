@@ -180,3 +180,6 @@ Route::get('error_log', 'ErrorController@log');
 
 // 邮件
 Route::get('mail_send', 'MailController@send');
+
+// 队列
+Route::get('queue_push', 'QueueController@push');
