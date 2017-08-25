@@ -37,7 +37,7 @@ class MailController extends Controller
 			// 抄送
 			// $message->cc('leeprince_spare@foxmail.com');
 			// 抄送 - 批量
-			$message->cc(['leeprince_img@fomxail.com','leeprince_spare@foxmail.com']);
+			$message->cc(['leeprince_img@foxmail.com','leeprince_spare@foxmail.com']);
 		});
 	}
 }
