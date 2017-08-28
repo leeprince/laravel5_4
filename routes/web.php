@@ -121,7 +121,7 @@ Route::get('student/sourceQuery', 'StudentController@sourceQuery');
 Route::get('student/constructQuery', 'StudentController@constructQuery');
 
 // Eloquent ORM
-Route::get('student/ormQuery', 'StudentController@ormQuery');
+Route::get('student_ormQuery', 'StudentController@ormQuery');
 
 // 模板引擎
 Route::get('student/bladeEngine', 'StudentController@bladeEngine');

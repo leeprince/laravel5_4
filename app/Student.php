@@ -13,7 +13,7 @@ class Student extends  Model
    	protected $primaryKey = 'id';
 
    	// 是否使用 laravel 自动管理的数据列(字段) created_at 和 updated_at 的格式化时间;
-    public $timestamps = true;
+    public $timestamps = false;
 
     // 如果你需要自定义用于存储时间戳的字段名称，可以在模型中设置 CREATED_AT 和 UPDATED_AT 常量：
     const CREATED_AT = 'created_at';
@@ -26,10 +26,20 @@ class Student extends  Model
     // 批量赋值白名单
     protected $fillable = ['name', 'age', 'sex'];
 
+    // 序列化
+    // 序列化为数组 或者 Json 中隐藏属性
+    protected $hidden = ['sex'];
+
+    // 序列化 - $visible 属性来定义模型数组和 JSON 显示的属性白名单; 当隐藏属性和白名单同时存在时,不会显示
+    // protected $visible = ['name', 'sex', 'age'];
+
+    // 序列化 - 追加到模型数组表单的访问器
+    protected $appends = ['is_admin'];
+
     // 批量赋值黑名单
     // protected $guarded = ['guarded_field'];
 
-    // 不使用 laravel 自动管理的数据列的时间格式设置, 自定义存储数据库的时间格式
+    // 保存数据时, 不使用 laravel 自动管理的数据列的时间格式设置, 自定义存储数据库的时间格式
     protected function getDateFormat()
     {
     	// 注意数据库中的数据类型;
@@ -57,6 +67,16 @@ class Student extends  Model
         }
 
         return $sexArray;
+    }
+
+    /**
+    * 为用户获取管理员标识
+    *
+    * @return bool
+    */
+    public function getIsAdminAttribute()
+    {
+        return $this->attributes['admin'] = "yes";
     }
 
 }
