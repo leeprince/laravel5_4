@@ -59,6 +59,22 @@
                             </div>
                         </div>
 
+
+
+                        <div class="form-group<?php echo e($errors->has('profile') ? ' has-error' : ''); ?>">
+                            <label for="profile" class="col-md-4 control-label">Profile</label>
+
+                            <div class="col-md-6">
+                                <input id="profile" type="text" class="form-control" name="profile" value="<?php echo e(old('profile')); ?>" required>
+
+                                <?php if($errors->has('profile')): ?>
+                                    <span class="help-block">
+                                        <strong><?php echo e($errors->first('profile')); ?></strong>
+                                    </span>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">

@@ -48,9 +48,23 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
+            'name'     => 'required|max:255',
+            'email'    => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
+            'profile'  => 'required|size:11',
+        ],[
+            'required' => ':attribute - 不能为空 ',
+            'max' => ':attribute - 长度超过了最大限制 ',
+            'min' => ':attribute -  长度超过了最小限制',
+            'email' => ':attribute -  格式错误',
+            'unique' => ':attribute -  已存在',
+            'confirmed' => ':attribute -  确认密码不一致',
+            'size' => ':attribute -  长度必须为 11 位',
+        ],[
+            'name' => '姓名',
+            'email' => '邮箱',
+            'password' => '密码',
+            'profile' => '验证码',
         ]);
     }
 
@@ -66,6 +80,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'profile' => $data['profile'],
         ]);
     }
 }

@@ -80,8 +80,13 @@
 	@endforelse
 	--}}
 	
+	{{-- 定义路由地址 --}}
 	<a href="{{ url('/student/modelUrl') }}">url()</a><br>
+
+	{{-- 定义路由指定控制器及操作 --}}
 	<a href="{{ action('StudentController@modelUrl')}}">action()</a><br>
+	
+	{{-- 定义路由别名 --}}
 	<a href="{{ route('model_url') }}">route()</a><br>
 	
 

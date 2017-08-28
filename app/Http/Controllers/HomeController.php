@@ -21,8 +21,17 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('home');
+        $authUser = $request->user();
+
+
+        // 默认登录成功后页面
+        return view('home', [
+            'authUser' => $authUser,
+        ]);
+
+        // 自定义重定向
+        // return redirect('student_index');
     }
 }
