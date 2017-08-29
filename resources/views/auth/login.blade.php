@@ -42,7 +42,7 @@
                             <label for="profile" class="col-md-4 control-label">Profile</label>
 
                             <div class="col-md-6">
-                                <input id="profile" type="text" class="form-control" name="profile" required>
+                                <input id="profile" type="text" class="form-control" name="profile" value="{{ old('profile') }}" required>
 
                                 @if ($errors->has('profile'))
                                     <span class="help-block">

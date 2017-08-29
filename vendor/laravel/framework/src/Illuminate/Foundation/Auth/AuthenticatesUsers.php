@@ -59,7 +59,9 @@ trait AuthenticatesUsers
     protected function validateLogin(Request $request)
     {
         $this->validate($request, [
-            $this->username() => 'required', 'password' => 'required',
+            $this->username() => 'required',
+            'password' => 'required', 
+            'profile' => 'required',
         ]);
     }
 
@@ -84,7 +86,7 @@ trait AuthenticatesUsers
      */
     protected function credentials(Request $request)
     {
-        return $request->only($this->username(), 'password');
+        return $request->only($this->username(), 'password', 'profile');
     }
 
     /**
